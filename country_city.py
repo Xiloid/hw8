@@ -18,15 +18,26 @@ data = {
 
 def main():
     city = input(': ')
-    data = {'Ukraine': ['Kiev', 'Kharkiv', 'Odesa', 'Dnipro']}
+    data = {
+        "Ukraine": ["Kiev", "Kharkiv", "Odesa", "Dnipro"],
+        "France": ["Paris", "Marseille", "Lyon", "Toulouse"],
+        "Austria": ["Vienna", "Graz", "Linz", "Salzburg"],
+        "Germany": ["Berlin", "Hamburg", "Munich", "Frankfurt"],
+    }
+#    for i in :
+#        for j in i:
+#            print(j)
     for item in data.values():
+        for j in item:
+            if j == city:
+                print(data.keys())
 #        print((item[2]))
-        if item[0] == city:
-            print(item[0])
-            print('ok')
-        else:
-            print(item)
-            print('ooops')
+#        if item[0] == city:
+#            print(item[0])
+#            print('ok')
+#        else:
+#            print(item)
+#            print('ooops')
 #    print(data.values())
 
 '''    in_city = input('Город? ')
