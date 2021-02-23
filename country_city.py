@@ -17,11 +17,16 @@ data = {
 
 
 def main():
-    city = input(': ')
+    city = input('Введите название города: ')
+    city_result = get_country(city)
+    print(f'Страна, которой принадлежит город {city}: {city_result}')
+
+
+def get_country(city):
     for key, value in data.items():
         for j in value:
             if j == city:
-                print(key)
+                return key
 
 
 def groupping_data(data):
