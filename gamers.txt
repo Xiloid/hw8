@@ -1,0 +1,2 @@
+{'name': 'Bob', 'games': 2, 'avg_attempts': 15, 'record': 11}
+{'name': 'Tom', 'games': 2, 'avg_attempts': 10, 'record': 8}

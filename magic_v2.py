@@ -12,19 +12,36 @@
     если данные об игроке есть в файле то загружать их в player_data.
 """
 import random
-record = 100
-answer = "y"
-while answer == "y":
-    gen = random.randint(1, 100)
+from pathlib import Path
+
+
+def main():
+    record = 1000
+    answer = "y"
+    summ = count = avr = 0
+    gamer_name = input('Введите имя игрока: ')
+    while answer == "y":
+        gen = random.randint(1, 100)
+        num = None
+        print('Сгенерировано случайное число от 1 до 100. Попробуйте угадать!')
+        tries = tries_amount(num, gen)
+        summ += tries
+        count += 1
+        if record > tries:
+            record = tries
+            print('Новый рекорд! Попыток: ', record)
+        avr = summ // count
+        player_data = {'name': gamer_name, 'games': count, 'avg_attempts': avr, 'record': record}
+        answer = input("Продолжить? y/n ")
+        if answer == "n":
+            file_record(player_data)
+            print('Bye!')
+
+
+def tries_amount(num, gen):
     tries = 1
-    print()  # Отступ верхней строки
-    print('Сгенерировано случайное число от 1 до 100. Попробуйте угадать!')
-    num = None
     while gen != num:
-        try:
-            num = int(input('Введите число: '))
-        except ValueError:
-            exit('Всё сломалось, введено не число или не целое число.')
+        num = int(input('Введите число: '))
         if gen < num:
             print('Много!')
             tries += 1
@@ -32,10 +49,16 @@ while answer == "y":
             print('Мало!')
             tries += 1
         else:
-            print(' Вы угадали! Попыток:', tries)
-    if record > tries:
-        record = tries
-        print('Новый рекорд! Попыток:', record)
-    answer = input("Продолжить? y/n ")
-    if answer == "n":
-        print('Пока!')
+            print('Вы угадали! Попыток: ', tries)
+    return tries
+
+
+def file_record(player_data):
+    path = Path('gamers.txt').resolve()
+    with open(path, 'a+') as f:
+        f.write(str(player_data) + '\n')
+        f.close()
+
+
+if __name__ == "__main__":
+    main()
